@@ -5,16 +5,19 @@ const app = express();
 const path = require('path');
 const { extname } = require('path');
 const port = 3000;
+
+//static files 
+app.use(express.static(path.join(__dirname,'public')))
+
 // HTTP logger
 app.use(morgan('combined'))
 // template engien 
+
 app.engine('hbs', hbs.engine(
   {extname: '.hbs'}
 ));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname,'resources/views'))
-
-console.log(path.join(__dirname,'resources/views'))
 
 
 app.get('/', (req, res) => {
